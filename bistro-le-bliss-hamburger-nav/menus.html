@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Menus | Bistro Le Bliss</title>
+  <meta name="description" content="Lunch and Dinner menus for Bistro Le Bliss." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="wood">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html">Bistro Le Bliss</a>
+      <div class="nav-toggle" onclick="toggleNav()"><span></span><span></span><span></span></div><nav class="nav" aria-label="Primary">
+        <a data-nav href="index.html">Home</a>
+        <a data-nav href="menus.html">Menus</a>
+        <a data-nav href="private-brunch.html">Private Brunch</a>
+        <a data-nav href="contact.html">Contact</a>
+        <a class="order" target="_blank" rel="noopener" href="https://www-bistrolebliss-com.filesusr.com/html/dd4884_19b5a4411184bac2e01eceef5a79bf1f.html#/restaurants/fd2f0f80/32343">Order Now</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="paper" data-page="menus">
+    <h1>Menus</h1>
+    <p class="menu-note" id="menuNote"></p>
+
+    <div class="segment" role="tablist" aria-label="Menu selection">
+      <button id="tab-lunch" role="tab" aria-selected="true" aria-controls="accordion">Lunch Menu</button>
+      <button id="tab-dinner" role="tab" aria-selected="false" aria-controls="accordion">Dinner Menu</button>
+      <span class="pill" id="activePill" aria-hidden="true" style="margin-left:auto;">Lunch</span>
+    </div>
+
+    <div class="search-row">
+      <label class="search" for="menuSearch">
+        <span class="pill" aria-hidden="true" style="margin-right:10px;">Search</span>
+        <input id="menuSearch" type="search" placeholder="Search menu…" autocomplete="off" />
+      </label>
+      <a class="btn primary" target="_blank" rel="noopener" href="https://www-bistrolebliss-com.filesusr.com/html/dd4884_19b5a4411184bac2e01eceef5a79bf1f.html#/restaurants/fd2f0f80/32343">Order Now</a>
+    </div>
+
+    <div class="accordion" id="accordion"></div>
+    <div class="no-matches" id="noMatches" role="status" aria-live="polite" data-show="false">
+      No matches found. Try a different search.
+    </div>
+  </main>
+
+  <footer class="footer">© 2026 Bistro Le Bliss</footer>
+  <script src="script.js"></script>
+</body>
+</html>
