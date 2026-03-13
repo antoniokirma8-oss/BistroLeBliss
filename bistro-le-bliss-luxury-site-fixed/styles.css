@@ -1,0 +1,184 @@
+
+:root{
+--bg:#faf8f4;
+--text:#2c2c2c;
+--accent:#c9a96a;
+--border:#ece9e3;
+}
+
+body{
+margin:0;
+font-family:'Inter',sans-serif;
+background:var(--bg);
+color:var(--text);
+}
+
+h1,h2,h3{
+font-family:'Playfair Display',serif;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+padding:40px 20px;
+}
+
+.navbar{
+background:white;
+border-bottom:1px solid var(--border);
+position:sticky;
+top:0;
+}
+
+.nav-inner{
+max-width:1100px;
+margin:auto;
+padding:18px;
+display:flex;
+align-items:center;
+}
+
+.logo{
+font-family:'Playfair Display',serif;
+font-size:22px;
+text-decoration:none;
+color:#222;
+}
+
+.nav-menu{
+margin-left:auto;
+display:flex;
+gap:22px;
+align-items:center;
+}
+
+.nav-menu a{
+text-decoration:none;
+color:#333;
+font-size:14px;
+}
+
+.order-btn{
+border:1px solid var(--accent);
+padding:8px 16px;
+border-radius:30px;
+color:var(--accent);
+}
+
+.order-btn:hover{
+background:var(--accent);
+color:white;
+}
+
+.hamburger{
+display:none;
+flex-direction:column;
+gap:5px;
+margin-left:auto;
+cursor:pointer;
+}
+
+.hamburger span{
+width:24px;
+height:2px;
+background:#333;
+}
+
+@media(max-width:768px){
+
+.hamburger{display:flex}
+
+.nav-menu{
+position:absolute;
+top:70px;
+right:20px;
+background:white;
+border:1px solid var(--border);
+padding:20px;
+border-radius:8px;
+flex-direction:column;
+display:none;
+}
+
+.nav-menu.active{display:flex}
+
+}
+
+.hero{
+height:420px;
+background:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.35)),
+url('assets/storefront.jpg') center/cover no-repeat;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+text-align:center;
+}
+
+.promo{
+margin-top:40px;
+padding:35px;
+background:var(--accent);
+color:white;
+border-radius:10px;
+text-align:center;
+}
+
+.contact-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+margin-top:30px;
+}
+
+@media(max-width:768px){
+.contact-grid{
+grid-template-columns:1fr;
+}
+}
+
+.brunch-card{
+max-width:700px;
+background:white;
+border:1px solid var(--border);
+border-radius:10px;
+padding:30px;
+margin-top:30px;
+}
+
+footer{
+text-align:center;
+padding:30px;
+color:#777;
+}
+/* CONTACT PAGE IMPROVEMENTS */
+
+.contact-intro{
+max-width:600px;
+margin-bottom:40px;
+color:#6b665e;
+line-height:1.6;
+}
+
+.contact-card{
+background:#ffffff;
+border:1px solid #e8e2d8;
+padding:20px;
+border-radius:10px;
+margin-bottom:20px;
+}
+
+.contact-card strong{
+display:block;
+margin-bottom:8px;
+font-size:16px;
+}
+
+.contact-card a{
+color:#c9a96a;
+text-decoration:none;
+}
+
+.contact-card a:hover{
+text-decoration:underline;
+}

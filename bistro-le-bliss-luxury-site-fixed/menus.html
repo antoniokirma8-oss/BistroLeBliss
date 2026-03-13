@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <title>Menus | Bistro Le Bliss</title>
+
+  <style>
+    .menu-toolbar{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+      justify-content:space-between;
+      margin:24px 0 30px;
+    }
+
+    .menu-toggle{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .menu-toggle button{
+      border:1px solid var(--border);
+      background:white;
+      padding:10px 16px;
+      border-radius:999px;
+      cursor:pointer;
+      font-family:'Inter',sans-serif;
+      font-size:14px;
+      color:var(--text);
+    }
+
+    .menu-toggle button.active{
+      background:var(--accent);
+      color:white;
+      border-color:var(--accent);
+    }
+
+    .menu-search{
+      width:100%;
+      max-width:320px;
+    }
+
+    .menu-search input{
+      width:100%;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      font-family:'Inter',sans-serif;
+      font-size:14px;
+      background:white;
+      color:var(--text);
+    }
+
+    .menu-note{
+      color:#6f6a63;
+      font-size:14px;
+      margin:0 0 26px;
+      max-width:900px;
+    }
+
+    .menu-category{
+      margin-top:34px;
+    }
+
+    .menu-category h2{
+      font-size:30px;
+      margin-bottom:12px;
+    }
+
+    .menu-category-note{
+      font-size:13px;
+      color:#7a746d;
+      margin:0 0 14px;
+      line-height:1.6;
+    }
+
+    .menu-item{
+      padding:12px 0;
+      border-bottom:1px solid #e7e2da;
+    }
+
+    .menu-item-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:20px;
+    }
+
+    .menu-name{
+      font-size:17px;
+      font-weight:500;
+      color:var(--text);
+    }
+
+    .menu-price{
+      white-space:nowrap;
+      font-weight:500;
+      color:var(--text);
+    }
+
+    .menu-desc{
+      margin-top:4px;
+      font-size:14px;
+      line-height:1.6;
+      color:#766f67;
+    }
+
+    .hidden{
+      display:none;
+    }
+
+    .no-results{
+      margin-top:28px;
+      padding:18px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:white;
+      color:#6f6a63;
+    }
+
+    @media(max-width:768px){
+      .menu-toolbar{
+        align-items:stretch;
+      }
+
+      .menu-search{
+        max-width:none;
+      }
+
+      .menu-item-top{
+        gap:12px;
+      }
+
+      .menu-name{
+        font-size:16px;
+      }
+
+      .menu-price{
+        font-size:15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="nav-inner">
+
+    <a class="logo" href="index.html">Bistro Le Bliss</a>
+
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+
+    <nav class="nav-menu">
+      <a href="index.html">Home</a>
+      <a href="menus.html">Menus</a>
+      <a href="private-brunch.html">Private Brunch</a>
+      <a href="contact.html">Contact</a>
+      <a class="order-btn" target="_blank"
+        href="https://www-bistrolebliss-com.filesusr.com/html/dd4884_19b5a4411184bac2e01eceef5a79bf1f.html#/restaurants/fd2f0f80/32343">
+        Order Now
+      </a>
+    </nav>
+
+  </div>
+</header>
+
+<div class="container">
+  <h1>Menus</h1>
+
+  <div class="menu-toolbar">
+    <div class="menu-toggle">
+      <button class="active" data-menu-btn="lunch" onclick="showMenu('lunch', this)">Lunch</button>
+      <button data-menu-btn="dinner" onclick="showMenu('dinner', this)">Dinner</button>
+    </div>
+
+    <div class="menu-search">
+      <input type="text" id="menuSearch" placeholder="Search menu items..." oninput="filterMenu()">
+    </div>
+  </div>
+
+  <!-- LUNCH -->
+  <div id="lunch-menu" class="menu-panel">
+    <p class="menu-note">
+      WE'RE OPEN FOR LUNCH! Serving lunch from 11:30am to 4pm on weekdays, Tuesday to Friday. Excited to see you!
+    </p>
+
+    <div class="menu-category">
+      <h2>Soups</h2>
+
+      <div class="menu-item" data-search="west bloomfield onion french onion soup with a twist">
+        <div class="menu-item-top">
+          <div class="menu-name">West Bloomfield Onion</div>
+          <div class="menu-price">$8</div>
+        </div>
+        <div class="menu-desc">French onion soup with a twist!</div>
+      </div>
+
+      <div class="menu-item" data-search="roasted ratatouille roasted vegetable soup">
+        <div class="menu-item-top">
+          <div class="menu-name">Roasted Ratatouille</div>
+          <div class="menu-price">$7</div>
+        </div>
+        <div class="menu-desc">roasted vegetable soup</div>
+      </div>
+
+      <div class="menu-item" data-search="soup du jour depends on chef's inspiration">
+        <div class="menu-item-top">
+          <div class="menu-name">Soup Du Jour</div>
+          <div class="menu-price">$7</div>
+        </div>
+        <div class="menu-desc">Depends on chef's inspiration</div>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <h2>Hors D'Oeuvres</h2>
+
+      <div class="menu-item" data-search="haricot vert and escargot almondine beurre maître d'hôtel parmigiano-reggiano">
+        <div class="menu-item-top">
+          <div class="menu-name">Haricot vert and escargot almondine</div>
+          <div class="menu-price">$15</div>
+        </div>
+        <div class="menu-desc">In Beurre Maître d'Hôtel and parmigiano-reggiano</div>
+      </div>
+
+      <div class="menu-item" data-search="fried artichokes peruvian teardrop peppers arugula lemon aioli">
+        <div class="menu-item-top">
+          <div class="menu-name">Fried Artichokes</div>
+          <div class="menu-price">$17</div>
+        </div>
+        <div class="menu-desc">peruvian teardrop peppers, arugula, lemon aioli</div>
+      </div>
+
+      <div class="menu-item" data-search="mussels provencal pomme frites steamed mussels white wine tomato sauce fresh herbs">
+        <div class="menu-item-top">
+          <div class="menu-name">Mussels Provencal &amp; Pomme Frites</div>
+          <div class="menu-price">$19</div>
+        </div>
+        <div class="menu-desc">steamed mussels, white wine tomato sauce, fresh herbs</div>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <h2>Classic Sandwiches</h2>
+      <p class="menu-category-note">
+        All sandwiches come with housemade chips, add $2 for pomme frites, $2 for sweet pomme frites, or $3 for truffle fries
+      </p>
+
+      <div class="menu-item" data-search="beef wellington beef tips prosciutto di parma arugula mushroom duxelles balsamic toasted baguette">
+        <div class="menu-item-top">
+          <div class="menu-name">Beef Wellington</div>
+          <div class="menu-price">$19</div>
+        </div>
+        <div class="menu-desc">beef tips, prosciutto di parma, arugula, mushroom duxelles, balsamic, toasted baguette</div>
+      </div>
+
+      <div class="menu-item" data-search="grilled chicken brie fig jam arugula grilled ciabatta">
+        <div class="menu-item-top">
+          <div class="menu-name">Grilled Chicken Brie</div>
+          <div class="menu-price">$15</div>
+        </div>
+        <div class="menu-desc">fig jam, arugula, grilled ciabatta</div>
+      </div>
+
+      <div class="menu-item" data-search="ari's burger 8oz beef patty gruyere cheese grilled mushrooms lettuce tomatoes toasted brioche">
+        <div class="menu-item-top">
+          <div class="menu-name">Ari's Burger</div>
+          <div class="menu-price">$16</div>
+        </div>
+        <div class="menu-desc">8oz beef patty, gruyere cheese, grilled mushrooms, lettuce, tomatoes, toasted brioche</div>
+      </div>
+
+      <div class="menu-item" data-search="tuna pan bagnat tuna salad tomatoes arugula hard boiled egg nicoise olive aioli baguette">
+        <div class="menu-item-top">
+          <div class="menu-name">Tuna Pan Bagnat</div>
+          <div class="menu-price">$16</div>
+        </div>
+        <div class="menu-desc">tuna salad, tomatoes, arugula, hard boiled egg, nicoise olive aioli, baguette</div>
+      </div>
+
+      <div class="menu-item" data-search="turkey croque monsieur roasted turkey gruyere cheese bechamel sauce grilled brioche">
+        <div class="menu-item-top">
+          <div class="menu-name">Turkey Croque Monsieur</div>
+          <div class="menu-price">$15</div>
+        </div>
+        <div class="menu-desc">roasted turkey, gruyere cheese, bechamel sauce, grilled brioche</div>
+      </div>
+
+      <div class="menu-item" data-search="grilled salmon sandwich field greens tomatoes mustard sauce ciabatta">
+        <div class="menu-item-top">
+          <div class="menu-name">Grilled Salmon Sandwich</div>
+          <div class="menu-price">$16</div>
+        </div>
+        <div class="menu-desc">field greens, tomatoes, mustard sauce, ciabatta</div>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <h2>Salads</h2>
+      <p class="menu-category-note">Add chicken 7, salmon 9, shrimp 8, beef tips 15</p>
+
+      <div class="menu-item" data-search="tomato and burrata caprese fresh basil arbequina olive oil d'espelette fleur de sel balsamic glaze">
+        <div class="menu-item-top">
+          <div class="menu-name">Tomato and burrata caprese</div>
+          <div class="menu-price">$17</div>
+        </div>
+        <div class="menu-desc">fresh basil, arbequina olive oil, d'Espelette, fleur de sel, balsamic glaze</div>
+      </div>
+
+      <div class="menu-item" data-search="classic caesar half caesar">
+        <div class="menu-item-top">
+          <div class="menu-name">Classic caesar</div>
+          <div class="menu-price">$15</div>
+        </div>
+        <div class="menu-desc">Half caesar 8</div>
+      </div>
+
+      <div class="menu-item" data-search="roasted butternut grilled shrimp and couscous field greens grape tomatoes french cut beans nicoise olives feta house vinaigrette">
+        <div class="menu-item-top">
+          <div class="menu-name">Roasted Butternut, grilled shrimp and couscous</div>
+          <div class="menu-price">$20</div>
+        </div>
+        <div class="menu-desc">field greens, grape tomatoes, french cut beans, nicoise olives, feta, house vinaigrette</div>
+      </div>
+
+      <div class="menu-item" data-search="michigan bistro crumbled blue dried cherries toasted pecans red onion grape tomatoes cucumbers field greens creamy balsamic vinaigrette">
+        <div class="menu-item-top">
+          <div class="menu-name">Michigan Bistro</div>
+          <div class="menu-price">$14</div>
+        </div>
+        <div class="menu-desc">crumbled blue, dried cherries, toasted pecans, red onion, grape tomatoes, cucumbers, field greens, creamy balsamic vinaigrette</div>
+      </div>
+
+      <div class="menu-item" data-search="tuna nicoise salad scoop of tuna salad green beans roasted potatoes roma tomatoes hard boiled egg nicoise olives bed of romaine lettuce house vinaigrette">
+        <div class="menu-item-top">
+          <div class="menu-name">Tuna Nicoise Salad</div>
+          <div class="menu-price">$18</div>
+        </div>
+        <div class="menu-desc">scoop of tuna salad, green beans, roasted potatoes, roma tomatoes, hard boiled egg, nicoise olives, on the bed of romaine lettuce, house vinaigrette</div>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <h2>Sides</h2>
+
+      <div class="menu-item" data-search="roasted cauliflower parmigiano-reggiano truffle oil">
+        <div class="menu-item-top">
+          <div class="menu-name">Roasted cauliflower</div>
+          <div class="menu-price">$8</div>
+        </div>
+        <div class="menu-desc">with Parmigiano-Reggiano and truffle oil</div>
+      </div>
+
+      <div class="menu-item" data-search="grilled asparagus parmigiano-reggiano truffle oil">
+        <div class="menu-item-top">
+          <div class="menu-name">Grilled asparagus</div>
+          <div class="menu-price">$7</div>
+        </div>
+        <div class="menu-desc">with Parmigiano-Reggiano and truffle oil</div>
+      </div>
+
+      <div class="menu-item" data-search="sweet pomme frites">
+        <div class="menu-item-top">
+          <div class="menu-name">Sweet Pomme Frites</div>
+          <div class="menu-price">$7</div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-search="truffle pomme frites house cut truffle pomme frites parmesan cheese">
+        <div class="menu-item-top">
+          <div class="menu-name">Truffle Pomme Frites</div>
+          <div class="menu-price">$8</div>
+        </div>
+        <div class="menu-desc">House cut truffle pomme frites with parmesan cheese</div>
+      </div>
+
+      <div class="menu-item" data-search="pomme frites">
+        <div class="menu-item-top">
+          <div class="menu-name">Pomme Frites</div>
+          <div class="menu-price">$7</div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-search="house salad">
+        <div class="menu-item-top">
+          <div class="menu-name">House Salad</div>
+          <div class="menu-price">$6</div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-search="extra bread basket 4 pieces">
+        <div class="menu-item-top">
+          <div class="menu-name">Extra bread basket</div>
+          <div class="menu-price">$2</div>
+        </div>
+        <div class="menu-desc">4 pieces</div>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <h2>Desserts</h2>
+
+      <div class="menu-item" data-search="apple pecan strudel fri and sat only a la mode">
+        <div class="menu-item-top">
+          <div class="menu-name">Apple Pecan Strudel (Fri and Sat only)</div>
+          <div class="menu-price">$11</div>
+        </div>
+        <div class="menu-desc">A la mode</div>
+      </div>
+
+      <div class="menu-item" data-search="crème brûlée traditional french dessert">
+        <div class="menu-item-top">
+          <div class="menu-name">Crème brûlée</div>
+          <div class="menu-price">$10</div>
+        </div>
+        <div class="menu-desc">Traditional French dessert</div>
+      </div>
+
+      <div class="menu-item" data-search="ray's ice cream">
+        <div class="menu-item-top">
+          <div class="menu-name">Ray's ice cream</div>
+          <div class="menu-price">$7</div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-search="pecan framboise moelleux cake belgian dark chocolate raspberry sauce brandied cherries a la mode">
+        <div class="menu-item-top">
+          <div class="menu-name">Pecan framboise moelleux cake</div>
+          <div class="menu-price">$12</div>
+        </div>
+        <div class="menu-desc">Belgian dark chocolate with raspberry sauce and brandied cherries, a la mode</div>
+      </div>
+
+      <div class="menu-item" data-search="basque burnt cheesecake">
+        <div class="menu-item-top">
+          <div class="menu-name">Basque burnt cheesecake</div>
+          <div class="menu-price">$10</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <h2>Drinks</h2>
+
+      <div class="menu-item" data-search="harney and sons sachet tea variety of delicious teas">
+        <div class="menu-item-top">
+          <div class="menu-name">Harney and sons sachet tea</div>
+          <div class="menu-price">$5</div>
+        </div>
+        <div class="menu-desc">Variety of delicious teas</div>
+      </div>
+
+      <div class="menu-item" data-search="sparkling water badoit pellegrino perrier small 3 large 5">
+        <div class="menu-item-top">
+          <div class="menu-name">Sparkling water</div>
+          <div class="menu-price">$5</div>
+        </div>
+        <div class="menu-desc">Badoit, Pellegrino,or Perrier<br>Small 3 Large 5</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DINNER -->
+  <div id="dinner-menu" class="menu-panel hidden">
+    <p class="menu-note">
+      Dinner service: Tuesday - Saturday from 5pm to 9pm. Wine and liquor now available. For Carryout on Friday and Saturday, please call before 5pm for pickup by 6pm only. Tuesday - Thursday, regular hours for carryout.
+    </p>
+
+    <div class="menu-category">
+      <h2>Wine</h2>
+
+      <div class="menu-item" data-search="wine mostly french italian wines european beer spirits">
+        <div class="menu-item-top">
+          <div class="menu-name">Wine selection</div>
+          <div class="menu-price"></div>
+        </div>
+        <div class="menu-desc">We have a selection of mostly French and Italian wines, European beer as well as spirits</div>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <h2>Hors D'Oeuvres</h2>
+
+      <div class="menu-item" data-search="fried artichokes peruvian teardrop peppers arugula lemon aioli">
+        <div class="menu-item-top">
+          <div class="menu-name">Fried Artichokes</div>
+          <div class="menu-price">$17</div>
+        </div>
+        <div class="menu-desc">peruvian teardrop peppers, arugula, lemon aioli</div>
+      </div>
+
+      <div class="menu-item" data-search="tomato and burrata caprese fresh basil arbequina olive oil d'espelette fleur de sel balsamic glaze">
+        <div class="menu-item-top">
+          <div class="menu-name">Tomato and burrata caprese</div>
+          <div class="menu-price">$17</div>
+        </div>
+        <div class="menu-desc">fresh basil, arbequina olive oil, d'Espelette, fleur de sel, balsamic glaze</div>
+      </div>
+
+      <div class="menu-item" data-search="wild mushroom duxelles crostini goat cheese microgreens balsamic glaze">
+        <div class="menu-item-top">
+          <div class="menu-name">Wild Mushroom Duxelles crostini</div>
+          <div class="menu-price">$16</div>
+        </div>
+        <div class="menu-desc">goat cheese, microgreens, balsamic glaze</div>
+      </div>
+
+      <div class="menu-item" data-search="haricot vert and escargot almondine beurre maître d'hôtel parmigiano-reggiano">
+        <div class="menu-item-top">
+          <div class="menu-name">Haricot vert and escargot almondine</div>
+          <div class="menu-price">$15</div>
+        </div>
+        <div class="menu-desc">In Beurre Maître d'Hôtel and parmigiano-reggiano</div>
+      </div>
+
+      <div class="menu-item" data-search="scallops st jacques white wine poached scallop gratin cremini mushrooms gruyere cheese dine in only">
+        <div class="menu-item-top">
+          <div class="menu-name">Scallops St Jacques</div>
+          <div class="menu-price">$19</div>
+        </div>
+        <div class="menu-desc">white wine poached scallop gratin, cremini mushrooms, gruyere cheese (dine in only)</div>
+      </div>
+
+      <div class="menu-item" data-search="mussels provencal steamed mussels white wine tomato sauce fresh herbs">
+        <div class="menu-item-top">
+          <div class="menu-name">Mussels Provencal</div>
+          <div class="menu-price">$18</div>
+        </div>
+        <div class="menu-desc">steamed mussels, white wine tomato sauce, fresh herbs</div>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <h2>Soups</h2>
+
+      <div class="menu-item" data-search="west bloomfield onion french onion soup with a twist">
+        <div class="menu-item-top">
+          <div class="menu-name">West Bloomfield onion</div>
+          <div class="menu-price">$8</div>
+        </div>
+        <div class="menu-desc">French onion soup with a twist!</div>
+      </div>
+
+      <div class="menu-item" data-search="roasted ratatouille roasted vegetable soup">
+        <div class="menu-item-top">
+          <div class="menu-name">Roasted Ratatouille</div>
+          <div class="menu-price">$7</div>
+        </div>
+        <div class="menu-desc">roasted vegetable soup</div>
+      </div>
+
+      <div class="menu-item" data-search="soup du jour depends on chef's inspiration">
+        <div class="menu-item-top">
+          <div class="menu-name">Soup Du Jour</div>
+          <div class="menu-price">$7</div>
+        </div>
+        <div class="menu-desc">Depends on chef's inspiration</div>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <h2>Salads</h2>
+      <p class="menu-category-note">Add chicken 7, salmon 9, shrimp 8, cajun beef tips 15</p>
+
+      <div class="menu-item" data-search="classic caesar half caesar">
+        <div class="menu-item-top">
+          <div class="menu-name">Classic caesar</div>
+          <div class="menu-price">$15</div>
+        </div>
+        <div class="menu-desc">Half caesar 8</div>
+      </div>
+
+      <div class="menu-item" data-search="roasted butternut grilled shrimp and couscous field greens grape tomatoes french cut beans nicoise olives feta house vinaigrette">
+        <div class="menu-item-top">
+          <div class="menu-name">Roasted Butternut, grilled shrimp and couscous</div>
+          <div class="menu-price">$20</div>
+        </div>
+        <div class="menu-desc">field greens, grape tomatoes, french cut beans, nicoise olives, feta, house vinaigrette</div>
+      </div>
+
+      <div class="menu-item" data-search="michigan bistro crumbled blue dried cherries toasted pecans red onion grape tomatoes cucumbers field greens creamy balsamic vinaigrette">
+        <div class="menu-item-top">
+          <div class="menu-name">Michigan Bistro</div>
+          <div class="menu-price">$14</div>
+        </div>
+        <div class="menu-desc">crumbled blue, dried cherries, toasted pecans, red onion, grape tomatoes, cucumbers, field greens, creamy balsamic vinaigrette</div>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <h2>Entrees</h2>
+
+      <div class="menu-item" data-search="boeuf bourguignon beef tenderloin tips cremini mushrooms pearl onions carrots yukon gold mashed potatoes burgundy wine">
+        <div class="menu-item-top">
+          <div class="menu-name">Boeuf Bourguignon</div>
+          <div class="menu-price">$38</div>
+        </div>
+        <div class="menu-desc">beef tenderloin tips, cremini mushrooms, pearl onions, carrots, yukon gold mashed potatoes, burgundy wine</div>
+      </div>
+
+      <div class="menu-item" data-search="charbroiled lamb chops yukon gold mashed potatoes sauteed spinach tart cherry glace">
+        <div class="menu-item-top">
+          <div class="menu-name">Charbroiled Lamb Chops *</div>
+          <div class="menu-price">$50</div>
+        </div>
+        <div class="menu-desc">charbroiled lamb chops, yukon gold mashed potatoes, sauteed spinach, tart cherry glace</div>
+      </div>
+
+      <div class="menu-item" data-search="salmon a la plancha faroe island salmon everything seasoning roasted vegetable medley fresh herb beurre blanc">
+        <div class="menu-item-top">
+          <div class="menu-name">Salmon a la plancha*</div>
+          <div class="menu-price">$30</div>
+        </div>
+        <div class="menu-desc">Faroe Island salmon, everything seasoning roasted vegetable medley, fresh herb beurre blanc</div>
+      </div>
+
+      <div class="menu-item" data-search="canard aux cerises seared duck breast sweet potato puree sauteed spinach goat cheese drunken michigan tart cherries">
+        <div class="menu-item-top">
+          <div class="menu-name">Canard aux cerises*</div>
+          <div class="menu-price">$30</div>
+        </div>
+        <div class="menu-desc">seared duck breast, sweet potato puree, sauteed spinach, goat cheese, drunken michigan tart cherries</div>
+      </div>
+
+      <div class="menu-item" data-search="rustic ragu bolognese slow cooked creamy bolognese sauce pappardelle pasta">
+        <div class="menu-item-top">
+          <div class="menu-name">Rustic ragu Bolognese</div>
+          <div class="menu-price">$26</div>
+        </div>
+        <div class="menu-desc">slow cooked creamy Bolognese sauce over pappardelle pasta</div>
+      </div>
+
+      <div class="menu-item" data-search="truffle saffron risotto roasted acorn mushrooms onions sun dried tomatoes spinach truffle oil">
+        <div class="menu-item-top">
+          <div class="menu-name">Truffle Saffron Risotto</div>
+          <div class="menu-price">$24</div>
+        </div>
+        <div class="menu-desc">roasted acorn, mushrooms, onions, sun dried tomatoes, spinach, truffle oil</div>
+      </div>
+
+      <div class="menu-item" data-search="grilled walleye cracker meal crusted fillet grilled asparagus roasted red skin potatoes whole grain beurre blanc">
+        <div class="menu-item-top">
+          <div class="menu-name">Grilled Walleye</div>
+          <div class="menu-price">$32</div>
+        </div>
+        <div class="menu-desc">cracker meal crusted fillet, grilled asparagus, roasted red skin potatoes, whole grain beurre blanc</div>
+      </div>
+
+      <div class="menu-item" data-search="steak au poivre pepper crusted 8 oz australian grass fed fillet grilled asparagus sweet pomme frites peppercorn sauce">
+        <div class="menu-item-top">
+          <div class="menu-name">Steak au Poivre*</div>
+          <div class="menu-price">$50</div>
+        </div>
+        <div class="menu-desc">pepper crusted 8 oz Australian grass fed fillet, grilled asparagus, sweet pomme frites, peppercorn sauce</div>
+      </div>
+
+      <div class="menu-item" data-search="poussin tabaka garlic infused spring chicken yukon gold mashed potatoes baby carrots petite french peas glace de poulet">
+        <div class="menu-item-top">
+          <div class="menu-name">Poussin Tabaka</div>
+          <div class="menu-price">$28</div>
+        </div>
+        <div class="menu-desc">garlic infused spring chicken, yukon gold mashed potatoes, baby carrots and petite french peas with glace de poulet</div>
+      </div>
+
+      <p class="menu-category-note" style="margin-top:16px;">
+        *<br>
+        Consuming raw or undercooked meats, poultry, seafood, shellfish or eggs may increase your risk of foodborne illness
+      </p>
+    </div>
+
+    <div class="menu-category">
+      <h2>Accompagnements</h2>
+
+      <div class="menu-item" data-search="truffle pomme frites house cut truffle pomme frites parmesan cheese">
+        <div class="menu-item-top">
+          <div class="menu-name">Truffle Pomme Frites</div>
+          <div class="menu-price">$8</div>
+        </div>
+        <div class="menu-desc">House cut truffle pomme frites with parmesan cheese</div>
+      </div>
+
+      <div class="menu-item" data-search="sweet pomme frites">
+        <div class="menu-item-top">
+          <div class="menu-name">Sweet Pomme Frites</div>
+          <div class="menu-price">$7</div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-search="pomme frites">
+        <div class="menu-item-top">
+          <div class="menu-name">Pomme Frites</div>
+          <div class="menu-price">$7</div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-search="roasted cauliflower parmigiano-reggiano truffle oil">
+        <div class="menu-item-top">
+          <div class="menu-name">Roasted cauliflower</div>
+          <div class="menu-price">$8</div>
+        </div>
+        <div class="menu-desc">with Parmigiano-Reggiano and truffle oil</div>
+      </div>
+
+      <div class="menu-item" data-search="grilled asparagus parmigiano-reggiano truffle oil">
+        <div class="menu-item-top">
+          <div class="menu-name">Grilled asparagus</div>
+          <div class="menu-price">$7</div>
+        </div>
+        <div class="menu-desc">with Parmigiano-Reggiano and truffle oil</div>
+      </div>
+
+      <div class="menu-item" data-search="house salad">
+        <div class="menu-item-top">
+          <div class="menu-name">House Salad</div>
+          <div class="menu-price">$6</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-category">
+      <h2>Desserts</h2>
+
+      <div class="menu-item" data-search="basque burnt cheesecake">
+        <div class="menu-item-top">
+          <div class="menu-name">Basque burnt cheesecake</div>
+          <div class="menu-price">$10</div>
+        </div>
+      </div>
+
+      <div class="menu-item" data-search="crème brûlée traditional french dessert">
+        <div class="menu-item-top">
+          <div class="menu-name">Crème brûlée</div>
+          <div class="menu-price">$10</div>
+        </div>
+        <div class="menu-desc">Traditional French dessert</div>
+      </div>
+
+      <div class="menu-item" data-search="pecan framboise moelleux cake belgian dark chocolate raspberry sauce brandied cherries a la mode">
+        <div class="menu-item-top">
+          <div class="menu-name">Pecan framboise moelleux cake</div>
+          <div class="menu-price">$12</div>
+        </div>
+        <div class="menu-desc">Belgian dark chocolate with raspberry sauce and brandied cherries, a la mode</div>
+      </div>
+
+      <div class="menu-item" data-search="apple pecan strudel fri and sat only a la mode">
+        <div class="menu-item-top">
+          <div class="menu-name">Apple Pecan Strudel (Fri and Sat only)</div>
+          <div class="menu-price">$11</div>
+        </div>
+        <div class="menu-desc">A la mode</div>
+      </div>
+
+      <div class="menu-item" data-search="ray's ice cream">
+        <div class="menu-item-top">
+          <div class="menu-name">Ray's ice cream</div>
+          <div class="menu-price">$7</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="no-results" class="no-results hidden">No menu items matched your search.</div>
+</div>
+
+<footer>
+  © 2026 Bistro Le Bliss
+</footer>
+
+<script src="script.js"></script>
+<script>
+  let activeMenu = 'lunch';
+
+  function showMenu(menu, btn){
+    activeMenu = menu;
+
+    document.getElementById('lunch-menu').classList.add('hidden');
+    document.getElementById('dinner-menu').classList.add('hidden');
+
+    document.getElementById(menu + '-menu').classList.remove('hidden');
+
+    document.querySelectorAll('[data-menu-btn]').forEach(button => {
+      button.classList.remove('active');
+    });
+
+    btn.classList.add('active');
+
+    document.getElementById('menuSearch').value = '';
+    filterMenu();
+  }
+
+  function filterMenu(){
+    const query = document.getElementById('menuSearch').value.toLowerCase().trim();
+    const panel = document.getElementById(activeMenu + '-menu');
+    const categories = panel.querySelectorAll('.menu-category');
+    let totalVisible = 0;
+
+    categories.forEach(category => {
+      const items = category.querySelectorAll('.menu-item');
+      let visibleInCategory = 0;
+
+      items.forEach(item => {
+        const text = item.getAttribute('data-search') || '';
+        const match = text.includes(query);
+        item.style.display = match ? '' : 'none';
+        if(match) visibleInCategory++;
+      });
+
+      const noteEls = category.querySelectorAll('.menu-category-note');
+      category.style.display = visibleInCategory > 0 || query === '' ? '' : 'none';
+
+      totalVisible += visibleInCategory;
+    });
+
+    document.getElementById('no-results').classList.toggle('hidden', totalVisible > 0 || query === '');
+  }
+</script>
+
+</body>
+</html>
